@@ -20,9 +20,10 @@ function Auth() {
     setLoading(true);
     setError("");
     try {
-      const url = isLogin
-        ? "http://localhost:5000/api/users/login"
-        : "http://localhost:5000/api/users/register";
+      const base = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const url = isLogin
+  ? `${base}/api/users/login`
+  : `${base}/api/users/register`;
 
       const body = isLogin
         ? { email: form.email, password: form.password }

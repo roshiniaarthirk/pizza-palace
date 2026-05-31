@@ -21,7 +21,8 @@ function Cart() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/orders", {
+      const base = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const res = await fetch(`${base}/api/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
