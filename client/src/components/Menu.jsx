@@ -32,10 +32,11 @@ function Menu() {
     const fetchPizzas = async () => {
       try {
         setLoading(true);
-        const url =
-          active === "All"
-            ? "http://localhost:5000/api/pizzas"
-            : `http://localhost:5000/api/pizzas?category=${active}`;
+        const base = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const url =
+  active === "All"
+    ? `${base}/api/pizzas`
+    : `${base}/api/pizzas?category=${active}`;
         const res = await fetch(url);
         const data = await res.json();
         setPizzas(data);
