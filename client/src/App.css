@@ -1,0 +1,78 @@
+/* ── NAVBAR ── */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 68px;
+  background: #f97316;
+}
+.logo { font-size: 1.6rem; color: #fff; font-weight: 700; }
+.nav-links { display: flex; list-style: none; gap: 2rem; }
+.nav-links li { color: #fff; font-weight: 600; cursor: pointer; }
+.login-btn {
+  background: #fff;
+  color: #f97316;
+  border: none;
+  padding: 0.5rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ── HERO ── */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem;
+  min-height: 480px;
+  background: #fff8f2;
+  gap: 2rem;
+}
+.hero-left { flex: 1; display: flex; flex-direction: column; gap: 1.1rem; max-width: 520px; }
+.hero-right { flex: 1; display: flex; justify-content: flex-end; }
+.hero-right img {
+  width: 100%;
+  max-width: 420px;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+/* ── OFFER BADGE ── */
+.offer-badge {
+  display: inline-flex;
+  align-items: center;
+  background: #fff3e8;
+  color: #c2410c;
+  border: 1.5px solid #fed7aa;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  width: fit-content;
+}
+
+/* ── BUTTONS ── */
+.hero-buttons { display: flex; gap: 1rem; margin-top: 0.5rem; }
+.order-btn {
+  background: #f97316;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.8rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.menu-btn {
+  background: transparent;
+  color: #f97316;
+  border: 2px solid #f97316;
+  padding: 0.75rem 1.8rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}

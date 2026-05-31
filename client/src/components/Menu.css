@@ -1,0 +1,459 @@
+/* ── SECTION ── */
+.menu-section {
+  padding: 3rem 3rem 4rem;
+  background: #fff8f2;
+}
+
+/* ── HEADER ── */
+.menu-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.menu-header h2 {
+  font-family: 'Boogaloo', cursive;
+  font-size: 2.8rem;
+  color: #1c0a00;
+  letter-spacing: 1px;
+}
+
+.menu-header p {
+  font-size: 1rem;
+  color: #78350f;
+  margin-top: 0.4rem;
+}
+
+/* ── CONTROLS ── */
+.menu-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto 1.5rem;
+}
+
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 340px;
+}
+
+.search-wrap input {
+  width: 100%;
+  padding: 0.6rem 1rem 0.6rem 2.5rem;
+  border: 2px solid #fed7aa;
+  border-radius: 999px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #1c0a00;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.search-wrap input:focus {
+  border-color: #f97316;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+}
+
+.sort-wrap select {
+  padding: 0.6rem 1.2rem;
+  border: 2px solid #fed7aa;
+  border-radius: 999px;
+  font-family: 'Boogaloo', cursive;
+  font-size: 0.95rem;
+  color: #f97316;
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+  transition: border 0.2s;
+}
+
+.sort-wrap select:focus {
+  border-color: #f97316;
+}
+
+/* ── FILTERS ── */
+.menu-filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto 1.5rem;
+}
+
+.filter-btn {
+  font-family: 'Boogaloo', cursive;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  padding: 0.4rem 1.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 2px solid #f97316;
+  background: transparent;
+  color: #f97316;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: #f97316;
+  color: #fff;
+}
+
+/* ── RESULTS COUNT ── */
+.results-count {
+  font-family: 'Boogaloo', cursive;
+  font-size: 1rem;
+  color: #78350f;
+  max-width: 1200px;
+  margin: 0 auto 1.2rem;
+}
+
+/* ── GRID ── */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── CARD ── */
+.card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(249, 115, 22, 0.2);
+}
+
+/* ── IMAGE ── */
+.card-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  transition: transform 0.3s;
+  display: block;
+}
+
+.card:hover img {
+  transform: scale(1.06);
+}
+
+/* ── BADGES ── */
+.best-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: 'Boogaloo', cursive;
+  font-size: 0.75rem;
+  background: #f97316;
+  color: #fff;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  z-index: 1;
+}
+
+.spicy-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.78rem;
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  z-index: 1;
+}
+
+.discount-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-family: 'Boogaloo', cursive;
+  font-size: 0.78rem;
+  background: #16a34a;
+  color: #fff;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  z-index: 1;
+}
+
+/* ── CARD BODY ── */
+.card-body {
+  padding: 1rem 1.1rem 1.2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Boogaloo', cursive;
+  font-size: 0.78rem;
+  background: #fff3e8;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+}
+
+.veg-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #16a34a;
+  border: 1.5px solid #15803d;
+}
+
+.nonveg-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #dc2626;
+  border: 1.5px solid #b91c1c;
+}
+
+.card-name {
+  font-family: 'Boogaloo', cursive;
+  font-size: 1.3rem;
+  color: #1c0a00;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.3rem;
+}
+
+.card-desc {
+  font-size: 0.83rem;
+  color: #78350f;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  flex: 1;
+}
+
+/* ── DETAIL CHIPS ── */
+.card-details {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+}
+
+.detail-chip {
+  font-size: 0.72rem;
+  background: #f3f4f6;
+  color: #374151;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+/* ── RATING ── */
+.card-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: #92400e;
+  margin-bottom: 0.8rem;
+}
+
+.stars {
+  color: #f97316;
+}
+
+/* ── CARD FOOTER ── */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.card-price {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-main {
+  font-family: 'Boogaloo', cursive;
+  font-size: 1.4rem;
+  color: #f97316;
+  letter-spacing: 0.5px;
+}
+
+.price-old {
+  font-size: 0.8rem;
+  color: #a8a29e;
+  text-decoration: line-through;
+}
+
+/* ── ADD BUTTON ── */
+.add-btn {
+  font-family: 'Boogaloo', cursive;
+  font-size: 0.95rem;
+  background: #f97316;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.add-btn:hover {
+  background: #ea6c0a;
+  transform: scale(1.05);
+}
+
+/* ── QTY CONTROLS ── */
+.qty-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qty-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #f97316;
+  background: transparent;
+  color: #f97316;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.qty-btn:hover {
+  background: #f97316;
+  color: #fff;
+}
+
+.qty-num {
+  font-family: 'Boogaloo', cursive;
+  font-size: 1rem;
+  color: #1c0a00;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* ── SKELETON ── */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.skeleton-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.08);
+}
+
+.skeleton-img {
+  width: 100%;
+  height: 190px;
+  background: linear-gradient(90deg, #f3f3f3 25%, #ececec 50%, #f3f3f3 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-body {
+  padding: 1rem 1.1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f3f3f3 25%, #ececec 50%, #f3f3f3 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  width: 100%;
+}
+
+.skeleton-line.short { width: 40%; }
+.skeleton-line.medium { width: 65%; }
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── EMPTY ── */
+.menu-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  grid-column: 1 / -1;
+}
+
+.menu-empty p {
+  font-family: 'Boogaloo', cursive;
+  font-size: 1.4rem;
+  color: #78350f;
+  margin-bottom: 1rem;
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #1c0a00;
+  color: #fff;
+  font-family: 'Boogaloo', cursive;
+  font-size: 1rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  transition: transform 0.3s;
+  z-index: 999;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}

@@ -1,0 +1,118 @@
+.offers-page {
+  padding: 4rem 3rem;
+  background: #fff8f2;
+  min-height: 100vh;
+}
+
+.offers-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.offers-header h2 {
+  font-family: 'Boogaloo', cursive;
+  font-size: 2.8rem;
+  color: #1c0a00;
+  letter-spacing: 1px;
+}
+
+.offers-header p {
+  font-size: 1rem;
+  color: #78350f;
+  margin-top: 0.4rem;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.offer-card {
+  border-radius: 20px;
+  padding: 1.8rem 1.5rem;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.offer-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+}
+
+.offer-red    { background: linear-gradient(135deg, #fff1f1, #ffe4e4); border: 1.5px solid #fca5a5; }
+.offer-orange { background: linear-gradient(135deg, #fff8f2, #fff3e8); border: 1.5px solid #fed7aa; }
+.offer-green  { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #86efac; }
+.offer-purple { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1.5px solid #d8b4fe; }
+.offer-blue   { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1.5px solid #93c5fd; }
+.offer-pink   { background: linear-gradient(135deg, #fdf2f8, #fce7f3); border: 1.5px solid #f9a8d4; }
+
+.offer-emoji {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.offer-expiry {
+  display: inline-block;
+  font-family: 'Boogaloo', cursive;
+  font-size: 0.75rem;
+  background: rgba(0,0,0,0.08);
+  color: #1c0a00;
+  padding: 0.15rem 0.7rem;
+  border-radius: 999px;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.3px;
+}
+
+.offer-title {
+  font-family: 'Boogaloo', cursive;
+  font-size: 1.5rem;
+  color: #1c0a00;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.offer-desc {
+  font-size: 0.88rem;
+  color: #78350f;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+.offer-code-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 0.5rem 0.8rem;
+  border: 1px dashed #f97316;
+}
+
+.offer-code {
+  font-family: 'Boogaloo', cursive;
+  font-size: 1.1rem;
+  color: #f97316;
+  letter-spacing: 1px;
+  flex: 1;
+}
+
+.copy-btn {
+  font-family: 'Boogaloo', cursive;
+  font-size: 0.85rem;
+  background: #f97316;
+  color: #fff;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.copy-btn:hover {
+  background: #ea6c0a;
+}
