@@ -10,13 +10,13 @@ const pizzas = [
     { name: "BBQ Chicken", description: "Smoky BBQ with chicken", price: 349, category: "Non-Veg", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400" },
     { name: "Veggie Supreme", description: "Fresh garden vegetables", price: 249, category: "Veg", image: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=400" },
     { name: "Paneer Tikka", description: "Spicy paneer with tikka sauce", price: 279, category: "Specialty", image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400" },
-    {
-        name: "Garlic Bread",
-        description: "Crispy garlic bread",
-        price: 99,
-        category: "Sides",
-        image: "https://images.unsplash.com/photo-1619531040576-f9416740661e?w=400"
-    },
+    { 
+  name: "Coke", 
+  description: "Chilled refreshing cola", 
+  price: 49, 
+  category: "Sides", 
+  image: "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=400" 
+},
 ];
 
 const seedDB = async () => {
