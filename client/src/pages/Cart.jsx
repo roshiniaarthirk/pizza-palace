@@ -32,6 +32,7 @@ function Cart() {
           items: cartItems.map((item) => ({
             pizza: item._id,
             qty: item.qty,
+            toppings: item.toppings || [],
           })),
           totalAmount: grandTotal,
           deliveryAddress: "Home",
@@ -78,7 +79,27 @@ function Cart() {
               <div className="cart-item-info">
                 <div className="cart-item-name">{item.name}</div>
                 <div className="cart-item-category">{item.category}</div>
-                <div className="cart-item-price">₹{item.price}</div>
+
+                {/* TOPPINGS DISPLAY */}
+                {item.toppings && item.toppings.length > 0 && (
+                  <div className="cart-item-toppings">
+                    <span className="toppings-tag">🍕 Toppings:</span>
+                    <div className="toppings-list">
+                      {item.toppings.map((t) => (
+                        <span key={t.id} className="topping-badge">
+                          {t.label} <span className="topping-badge-price">+₹{t.price}</span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="cart-item-price">
+                  ₹{item.price}
+                  {item.originalPrice && item.price !== item.originalPrice && (
+                    <span className="cart-base-price"> (Base ₹{item.originalPrice})</span>
+                  )}
+                </div>
               </div>
               <div className="cart-item-right">
                 <div className="qty-wrap">
