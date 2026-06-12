@@ -32,7 +32,6 @@ function StarRating({ rating, reviews }) {
   );
 }
 
-// ── Toppings Modal ──────────────────────────────────────────────
 function ToppingsModal({ pizza, onClose, onConfirm }) {
   const [selected, setSelected] = useState({});
 
@@ -53,60 +52,40 @@ function ToppingsModal({ pizza, onClose, onConfirm }) {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>✕</button>
-
         <div className="modal-header">
-          <img
-            src={pizza.image || pizza.imageUrl}
-            alt={pizza.name}
-            className="modal-pizza-img"
-          />
+          <img src={pizza.image || pizza.imageUrl} alt={pizza.name} className="modal-pizza-img" />
           <div>
             <h3 className="modal-pizza-name">{pizza.name}</h3>
             <p className="modal-pizza-desc">{pizza.description}</p>
             <span className="modal-base-price">Base price: ₹{pizza.price}</span>
           </div>
         </div>
-
         <h4 className="modal-toppings-title">Choose Your Toppings</h4>
         <p className="modal-toppings-sub">Each topping is charged extra</p>
-
         <div className="toppings-grid">
           {TOPPINGS.map((topping) => (
-            <label
-              key={topping.id}
-              className={`topping-chip ${selected[topping.id] ? "selected" : ""}`}
-            >
-              <input
-                type="checkbox"
-                checked={!!selected[topping.id]}
-                onChange={() => toggleTopping(topping.id)}
-              />
+            <label key={topping.id} className={`topping-chip ${selected[topping.id] ? "selected" : ""}`}>
+              <input type="checkbox" checked={!!selected[topping.id]} onChange={() => toggleTopping(topping.id)} />
               <span className="topping-label">{topping.label}</span>
               <span className="topping-price">+₹{topping.price}</span>
             </label>
           ))}
         </div>
-
         <div className="modal-footer">
           <div className="modal-total">
             <span>Total</span>
             <span className="modal-total-price">₹{totalPrice}</span>
           </div>
           {selectedToppings.length > 0 && (
-            <p className="modal-selected-summary">
-              {selectedToppings.map((t) => t.label).join(", ")}
-            </p>
+            <p className="modal-selected-summary">{selectedToppings.map((t) => t.label).join(", ")}</p>
           )}
-          <button className="modal-confirm-btn" onClick={handleConfirm}>
-            Add to Cart 🛒
-          </button>
+          <button className="modal-confirm-btn" onClick={handleConfirm}>Add to Cart 🛒</button>
         </div>
       </div>
     </div>
   );
 }
 
-// ── Main Menu ───────────────────────────────────────────────────
 function Menu() {
   const [pizzas, setPizzas] = useState([]);
   const [active, setActive] = useState("All");
@@ -122,10 +101,7 @@ function Menu() {
       try {
         setLoading(true);
         const base = import.meta.env.VITE_API_URL || "http://localhost:5000";
-        const url =
-          active === "All"
-            ? `${base}/api/pizzas`
-            : `${base}/api/pizzas?category=${active}`;
+        const url = active === "All" ? `${base}/api/pizzas` : `${base}/api/pizzas?category=${active}`;
         const res = await fetch(url);
         const data = await res.json();
         setPizzas(data);
@@ -143,20 +119,10 @@ function Menu() {
     setTimeout(() => setToast(""), 2500);
   };
 
-  // Opens toppings modal before adding to cart
-  const handleAddClick = (pizza) => {
-    setModalPizza(pizza);
-  };
+  const handleAddClick = (pizza) => setModalPizza(pizza);
 
-  // Called when user confirms toppings in modal
   const handleConfirmToppings = (pizza, selectedToppings, totalPrice) => {
-    const pizzaWithToppings = {
-      ...pizza,
-      toppings: selectedToppings,
-      price: totalPrice,        // override price with toppings included
-      originalPrice: pizza.price,
-    };
-    addToCart(pizzaWithToppings);
+    addToCart({ ...pizza, toppings: selectedToppings, price: totalPrice, originalPrice: pizza.price });
     showToast(`${pizza.name} added to cart! 🛒`);
   };
 
@@ -165,11 +131,10 @@ function Menu() {
     return item ? item.qty : 0;
   };
 
-  let filtered = pizzas.filter(
-    (p) =>
-      p.name.toLowerCase().includes(search.toLowerCase()) ||
-      p.description.toLowerCase().includes(search.toLowerCase()) ||
-      p.category.toLowerCase().includes(search.toLowerCase())
+  let filtered = pizzas.filter((p) =>
+    p.name.toLowerCase().includes(search.toLowerCase()) ||
+    p.description.toLowerCase().includes(search.toLowerCase()) ||
+    p.category.toLowerCase().includes(search.toLowerCase())
   );
 
   if (sort === "price-low") filtered.sort((a, b) => a.price - b.price);
@@ -183,17 +148,10 @@ function Menu() {
         <h2>🍕 Our Menu</h2>
         <p>Hand-crafted with love, baked to perfection</p>
       </div>
-
-      {/* SEARCH + SORT */}
       <div className="menu-controls">
         <div className="search-wrap">
           <span className="search-icon">🔍</span>
-          <input
-            type="text"
-            placeholder="Search pizzas..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          <input type="text" placeholder="Search pizzas..." value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
         <div className="sort-wrap">
           <select value={sort} onChange={(e) => setSort(e.target.value)}>
@@ -205,27 +163,19 @@ function Menu() {
           </select>
         </div>
       </div>
-
-      {/* FILTERS */}
       <div className="menu-filters">
         {filters.map((f) => (
-          <button
-            key={f.value}
-            className={`filter-btn ${active === f.value ? "active" : ""}`}
-            onClick={() => { setActive(f.value); setSearch(""); }}
-          >
+          <button key={f.value} className={`filter-btn ${active === f.value ? "active" : ""}`}
+            onClick={() => { setActive(f.value); setSearch(""); }}>
             {f.label}
           </button>
         ))}
       </div>
-
-      <div className="results-count">
-        Showing {filtered.length} pizza{filtered.length !== 1 ? "s" : ""}
-      </div>
+      <div className="results-count">Showing {filtered.length} pizza{filtered.length !== 1 ? "s" : ""}</div>
 
       {loading ? (
         <div className="skeleton-grid">
-          {[1, 2, 3, 4].map((n) => (
+          {[1,2,3,4].map((n) => (
             <div key={n} className="skeleton-card">
               <div className="skeleton-img" />
               <div className="skeleton-body">
@@ -239,20 +189,13 @@ function Menu() {
       ) : filtered.length === 0 ? (
         <div className="menu-empty">
           <p>😔 No pizzas found!</p>
-          <button
-            className="filter-btn active"
-            onClick={() => { setSearch(""); setActive("All"); }}
-          >
-            Clear Search
-          </button>
+          <button className="filter-btn active" onClick={() => { setSearch(""); setActive("All"); }}>Clear Search</button>
         </div>
       ) : (
         <div className="menu-grid">
           {filtered.map((pizza) => {
             const qty = getQty(pizza._id);
-            const disc = pizza.oldPrice
-              ? Math.round((1 - pizza.price / pizza.oldPrice) * 100)
-              : null;
+            const disc = pizza.oldPrice ? Math.round((1 - pizza.price / pizza.oldPrice) * 100) : null;
             return (
               <div key={pizza._id} className="card">
                 <div className="card-img-wrap">
@@ -270,43 +213,24 @@ function Menu() {
                   </div>
                   <div className="card-name">{pizza.name}</div>
                   <div className="card-desc">{pizza.description}</div>
-
                   <div className="card-details">
                     {pizza.size && <span className="detail-chip">📏 {pizza.size}</span>}
                     {pizza.crust && <span className="detail-chip">🍞 {pizza.crust} Crust</span>}
                     {pizza.prepTime && <span className="detail-chip">⏱️ {pizza.prepTime}</span>}
                   </div>
-
-                  {pizza.rating && (
-                    <StarRating rating={pizza.rating} reviews={pizza.reviews} />
-                  )}
-
+                  {pizza.rating && <StarRating rating={pizza.rating} reviews={pizza.reviews} />}
                   <div className="card-footer">
                     <div className="card-price">
                       <span className="price-main">₹{pizza.price}</span>
-                      {pizza.oldPrice && (
-                        <span className="price-old">₹{pizza.oldPrice}</span>
-                      )}
+                      {pizza.oldPrice && <span className="price-old">₹{pizza.oldPrice}</span>}
                     </div>
                     {qty === 0 ? (
-                      <button className="add-btn" onClick={() => handleAddClick(pizza)}>
-                        + Add
-                      </button>
+                      <button className="add-btn" onClick={() => handleAddClick(pizza)}>+ Add</button>
                     ) : (
                       <div className="qty-wrap">
-                        <button
-                          className="qty-btn"
-                          onClick={() =>
-                            qty === 1
-                              ? removeFromCart(pizza._id)
-                              : updateQty(pizza._id, qty - 1)
-                          }
-                        >−</button>
+                        <button className="qty-btn" onClick={() => qty === 1 ? removeFromCart(pizza._id) : updateQty(pizza._id, qty - 1)}>−</button>
                         <span className="qty-num">{qty}</span>
-                        <button
-                          className="qty-btn"
-                          onClick={() => updateQty(pizza._id, qty + 1)}
-                        >+</button>
+                        <button className="qty-btn" onClick={() => updateQty(pizza._id, qty + 1)}>+</button>
                       </div>
                     )}
                   </div>
@@ -319,7 +243,6 @@ function Menu() {
 
       {toast && <div className="toast show">{toast}</div>}
 
-      {/* TOPPINGS MODAL */}
       {modalPizza && (
         <ToppingsModal
           pizza={modalPizza}
