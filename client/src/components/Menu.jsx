@@ -10,6 +10,19 @@ const filters = [
   { label: "🍟 Sides", value: "Sides" },
 ];
 
+const TOPPINGS = [
+  { id: "extra_cheese", label: "Extra Cheese 🧀", price: 40 },
+  { id: "mushrooms", label: "Mushrooms 🍄", price: 30 },
+  { id: "olives", label: "Black Olives 🫒", price: 25 },
+  { id: "jalapenos", label: "Jalapeños 🌶️", price: 20 },
+  { id: "corn", label: "Sweet Corn 🌽", price: 20 },
+  { id: "onions", label: "Caramelised Onions 🧅", price: 20 },
+  { id: "peppers", label: "Bell Peppers 🫑", price: 25 },
+  { id: "paneer", label: "Paneer Cubes 🟨", price: 50 },
+  { id: "chicken", label: "Grilled Chicken 🍗", price: 60 },
+  { id: "pepperoni", label: "Pepperoni 🍕", price: 55 },
+];
+
 function StarRating({ rating, reviews }) {
   return (
     <div className="card-rating">
@@ -19,6 +32,81 @@ function StarRating({ rating, reviews }) {
   );
 }
 
+// ── Toppings Modal ──────────────────────────────────────────────
+function ToppingsModal({ pizza, onClose, onConfirm }) {
+  const [selected, setSelected] = useState({});
+
+  const toggleTopping = (id) => {
+    setSelected((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const selectedToppings = TOPPINGS.filter((t) => selected[t.id]);
+  const toppingsTotal = selectedToppings.reduce((sum, t) => sum + t.price, 0);
+  const totalPrice = pizza.price + toppingsTotal;
+
+  const handleConfirm = () => {
+    onConfirm(pizza, selectedToppings, totalPrice);
+    onClose();
+  };
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>✕</button>
+
+        <div className="modal-header">
+          <img
+            src={pizza.image || pizza.imageUrl}
+            alt={pizza.name}
+            className="modal-pizza-img"
+          />
+          <div>
+            <h3 className="modal-pizza-name">{pizza.name}</h3>
+            <p className="modal-pizza-desc">{pizza.description}</p>
+            <span className="modal-base-price">Base price: ₹{pizza.price}</span>
+          </div>
+        </div>
+
+        <h4 className="modal-toppings-title">Choose Your Toppings</h4>
+        <p className="modal-toppings-sub">Each topping is charged extra</p>
+
+        <div className="toppings-grid">
+          {TOPPINGS.map((topping) => (
+            <label
+              key={topping.id}
+              className={`topping-chip ${selected[topping.id] ? "selected" : ""}`}
+            >
+              <input
+                type="checkbox"
+                checked={!!selected[topping.id]}
+                onChange={() => toggleTopping(topping.id)}
+              />
+              <span className="topping-label">{topping.label}</span>
+              <span className="topping-price">+₹{topping.price}</span>
+            </label>
+          ))}
+        </div>
+
+        <div className="modal-footer">
+          <div className="modal-total">
+            <span>Total</span>
+            <span className="modal-total-price">₹{totalPrice}</span>
+          </div>
+          {selectedToppings.length > 0 && (
+            <p className="modal-selected-summary">
+              {selectedToppings.map((t) => t.label).join(", ")}
+            </p>
+          )}
+          <button className="modal-confirm-btn" onClick={handleConfirm}>
+            Add to Cart 🛒
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Main Menu ───────────────────────────────────────────────────
 function Menu() {
   const [pizzas, setPizzas] = useState([]);
   const [active, setActive] = useState("All");
@@ -26,6 +114,7 @@ function Menu() {
   const [sort, setSort] = useState("default");
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState("");
+  const [modalPizza, setModalPizza] = useState(null);
   const { cartItems, addToCart, updateQty, removeFromCart } = useContext(CartContext);
 
   useEffect(() => {
@@ -33,10 +122,10 @@ function Menu() {
       try {
         setLoading(true);
         const base = import.meta.env.VITE_API_URL || "http://localhost:5000";
-const url =
-  active === "All"
-    ? `${base}/api/pizzas`
-    : `${base}/api/pizzas?category=${active}`;
+        const url =
+          active === "All"
+            ? `${base}/api/pizzas`
+            : `${base}/api/pizzas?category=${active}`;
         const res = await fetch(url);
         const data = await res.json();
         setPizzas(data);
@@ -51,11 +140,23 @@ const url =
 
   const showToast = (msg) => {
     setToast(msg);
-    setTimeout(() => setToast(""), 2000);
+    setTimeout(() => setToast(""), 2500);
   };
 
-  const handleAdd = (pizza) => {
-    addToCart(pizza);
+  // Opens toppings modal before adding to cart
+  const handleAddClick = (pizza) => {
+    setModalPizza(pizza);
+  };
+
+  // Called when user confirms toppings in modal
+  const handleConfirmToppings = (pizza, selectedToppings, totalPrice) => {
+    const pizzaWithToppings = {
+      ...pizza,
+      toppings: selectedToppings,
+      price: totalPrice,        // override price with toppings included
+      originalPrice: pizza.price,
+    };
+    addToCart(pizzaWithToppings);
     showToast(`${pizza.name} added to cart! 🛒`);
   };
 
@@ -64,11 +165,11 @@ const url =
     return item ? item.qty : 0;
   };
 
-  // Search + Sort
-  let filtered = pizzas.filter((p) =>
-    p.name.toLowerCase().includes(search.toLowerCase()) ||
-    p.description.toLowerCase().includes(search.toLowerCase()) ||
-    p.category.toLowerCase().includes(search.toLowerCase())
+  let filtered = pizzas.filter(
+    (p) =>
+      p.name.toLowerCase().includes(search.toLowerCase()) ||
+      p.description.toLowerCase().includes(search.toLowerCase()) ||
+      p.category.toLowerCase().includes(search.toLowerCase())
   );
 
   if (sort === "price-low") filtered.sort((a, b) => a.price - b.price);
@@ -138,7 +239,10 @@ const url =
       ) : filtered.length === 0 ? (
         <div className="menu-empty">
           <p>😔 No pizzas found!</p>
-          <button className="filter-btn active" onClick={() => { setSearch(""); setActive("All"); }}>
+          <button
+            className="filter-btn active"
+            onClick={() => { setSearch(""); setActive("All"); }}
+          >
             Clear Search
           </button>
         </div>
@@ -167,7 +271,6 @@ const url =
                   <div className="card-name">{pizza.name}</div>
                   <div className="card-desc">{pizza.description}</div>
 
-                  {/* DETAILS */}
                   <div className="card-details">
                     {pizza.size && <span className="detail-chip">📏 {pizza.size}</span>}
                     {pizza.crust && <span className="detail-chip">🍞 {pizza.crust} Crust</span>}
@@ -186,7 +289,7 @@ const url =
                       )}
                     </div>
                     {qty === 0 ? (
-                      <button className="add-btn" onClick={() => handleAdd(pizza)}>
+                      <button className="add-btn" onClick={() => handleAddClick(pizza)}>
                         + Add
                       </button>
                     ) : (
@@ -215,6 +318,15 @@ const url =
       )}
 
       {toast && <div className="toast show">{toast}</div>}
+
+      {/* TOPPINGS MODAL */}
+      {modalPizza && (
+        <ToppingsModal
+          pizza={modalPizza}
+          onClose={() => setModalPizza(null)}
+          onConfirm={handleConfirmToppings}
+        />
+      )}
     </section>
   );
 }
