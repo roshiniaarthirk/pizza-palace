@@ -1,287 +1,143 @@
-/* ── Page Wrapper ───────────────────────────────────────── */
-.contact-page {
+/* ── PAGE ── */
+.offers-page {
+  padding: 3rem;
+  background: #fff8f2;
   min-height: 100vh;
-  background: #fffaf3;
-  padding: 2.5rem 1.5rem;
-  font-family: 'Nunito', sans-serif;
 }
 
-/* ── Header ─────────────────────────────────────────────── */
-.contact-header {
+/* ── HEADER ── */
+.offers-header {
   text-align: center;
   margin-bottom: 2.5rem;
 }
 
-.contact-header h2 {
+.offers-header h2 {
   font-family: 'Boogaloo', cursive;
-  font-size: 2.4rem;
-  color: #2d1b00;
+  font-size: 2.8rem;
+  color: #1c0a00;
+  letter-spacing: 1px;
   margin: 0 0 0.4rem;
 }
 
-.contact-header p {
+.offers-header p {
   font-size: 1rem;
-  color: #888;
+  color: #78350f;
   margin: 0;
 }
 
-/* ── Two-column layout ──────────────────────────────────── */
-.contact-layout {
+/* ── GRID ── */
+.offers-grid {
   display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: 2rem;
-  max-width: 1000px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
   margin: 0 auto;
-  align-items: start;
 }
 
-/* ── Info Card ──────────────────────────────────────────── */
-.contact-info {
-  background: #fff;
-  border-radius: 18px;
-  padding: 2rem 1.5rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-  border: 1px solid #f0ece4;
-}
-
-.contact-info h3 {
-  font-family: 'Boogaloo', cursive;
-  font-size: 1.4rem;
-  color: #2d1b00;
-  margin: 0 0 0.4rem;
-}
-
-.contact-info > p {
-  font-size: 0.88rem;
-  color: #999;
-  margin: 0 0 1.5rem;
-}
-
-.info-items {
+/* ── CARD BASE ── */
+.offer-card {
+  border-radius: 20px;
+  padding: 1.75rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 0.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
 }
 
-.info-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.85rem;
+.offer-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.13);
 }
 
-.info-icon {
-  font-size: 1.4rem;
-  width: 42px;
-  height: 42px;
-  background: #fff3e0;
-  border-radius: 10px;
+/* ── COLOR VARIANTS ── */
+.offer-red    { background: #fff1f1; border: 1.5px solid #fca5a5; }
+.offer-orange { background: #fff7ed; border: 1.5px solid #fed7aa; }
+.offer-green  { background: #f0fdf4; border: 1.5px solid #86efac; }
+.offer-purple { background: #faf5ff; border: 1.5px solid #d8b4fe; }
+.offer-blue   { background: #eff6ff; border: 1.5px solid #93c5fd; }
+.offer-pink   { background: #fdf2f8; border: 1.5px solid #f9a8d4; }
+
+/* ── EMOJI ── */
+.offer-emoji {
+  font-size: 2.5rem;
+  margin-bottom: 0.25rem;
+}
+
+/* ── EXPIRY TAG ── */
+.offer-expiry {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #f97316;
+}
+
+/* ── TITLE ── */
+.offer-title {
+  font-family: 'Boogaloo', cursive;
+  font-size: 1.5rem;
+  color: #1c0a00;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* ── DESC ── */
+.offer-desc {
+  font-size: 0.88rem;
+  color: #78350f;
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+/* ── CODE ROW ── */
+.offer-code-wrap {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  background: rgba(255,255,255,0.7);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  border: 1px dashed #f97316;
 }
 
-.info-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #e67e00;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 0.2rem;
-}
-
-.info-value {
-  font-size: 0.9rem;
-  color: #444;
-  line-height: 1.4;
-}
-
-/* ── Form Card ──────────────────────────────────────────── */
-.contact-form-wrap {
-  background: #fff;
-  border-radius: 18px;
-  padding: 2rem 1.75rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-  border: 1px solid #f0ece4;
-}
-
-.contact-form h3 {
+.offer-code {
   font-family: 'Boogaloo', cursive;
-  font-size: 1.4rem;
-  color: #2d1b00;
-  margin: 0 0 1.5rem;
+  font-size: 1.1rem;
+  color: #f97316;
+  letter-spacing: 1.5px;
+  flex: 1;
 }
 
-/* ── Form Fields ────────────────────────────────────────── */
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #444;
-  margin-bottom: 0.35rem;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 0.65rem 0.9rem;
-  border: 1.5px solid #e8e0d5;
-  border-radius: 10px;
-  font-size: 0.9rem;
-  font-family: 'Nunito', sans-serif;
-  background: #fffaf3;
-  color: #2d1b00;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  box-sizing: border-box;
-  outline: none;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: #e67e00;
-  box-shadow: 0 0 0 3px rgba(230, 126, 0, 0.12);
-  background: #fff;
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: #bbb;
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 90px;
-}
-
-/* ── Side-by-side fields ────────────────────────────────── */
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-/* ── Time Slot Grid ─────────────────────────────────────── */
-.slot-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 6px;
-}
-
-.slot-btn {
-  padding: 10px 4px;
-  font-size: 0.78rem;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 600;
-  border: 1.5px solid #e8e0d5;
-  border-radius: 10px;
-  background: #fffaf3;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: #444;
-}
-
-.slot-btn:hover {
-  background: #fff3e0;
-  border-color: #e67e00;
-  color: #e67e00;
-}
-
-.slot-active {
-  background: #e67e00 !important;
-  color: #fff !important;
-  border-color: #e67e00 !important;
-}
-
-/* ── Field Errors ───────────────────────────────────────── */
-.field-error {
-  font-size: 0.75rem;
-  color: #e05c2a;
-  margin-top: 4px;
-  display: block;
-}
-
-/* ── Optional label ─────────────────────────────────────── */
-.optional {
-  font-size: 11px;
-  color: #bbb;
-  font-weight: 400;
-}
-
-/* ── Submit Button ──────────────────────────────────────── */
-.contact-btn {
-  width: 100%;
-  padding: 0.85rem;
-  margin-top: 0.5rem;
-  background: #e67e00;
+.copy-btn {
+  font-family: 'Boogaloo', cursive;
+  font-size: 0.85rem;
+  background: #f97316;
   color: #fff;
   border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-family: 'Boogaloo', cursive;
-  letter-spacing: 0.5px;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
   cursor: pointer;
   transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
 }
 
-.contact-btn:hover {
-  background: #cf6f00;
-  transform: translateY(-1px);
+.copy-btn:hover {
+  background: #ea6c0a;
+  transform: scale(1.05);
 }
 
-.contact-btn:active {
-  transform: translateY(0);
+.copy-btn:active {
+  transform: scale(0.98);
 }
 
-/* ── Success State ──────────────────────────────────────── */
-.contact-success {
-  text-align: center;
-  padding: 2.5rem 1rem;
-}
-
-.success-icon {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-}
-
-.contact-success h3 {
-  font-family: 'Boogaloo', cursive;
-  font-size: 1.8rem;
-  color: #2d1b00;
-  margin: 0 0 0.75rem;
-}
-
-.contact-success p {
-  color: #666;
-  margin: 0.3rem 0;
-  font-size: 0.95rem;
-}
-
-.contact-success .contact-btn {
-  margin-top: 1.5rem;
-  width: auto;
-  padding: 0.75rem 2rem;
-}
-
-/* ── Responsive ─────────────────────────────────────────── */
+/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .contact-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-
-  .slot-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .contact-header h2 {
-    font-size: 1.8rem;
-  }
+  .offers-page { padding: 1.5rem 1rem; }
+  .offers-header h2 { font-size: 2rem; }
+  .offers-grid { grid-template-columns: 1fr; }
 }
